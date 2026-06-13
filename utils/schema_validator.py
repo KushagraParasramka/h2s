@@ -17,8 +17,28 @@ def validateSchema(candidate: dict = None)-> bool:
     try:
         queue = [""]
         while len(queue):
-            path = queue.pop[0]
+            path = queue.pop(0)
             result = schema.checkField(path = path, candidate = candidate)
+            if(not result.get("status")):
+                # print(f"Field not found : {path}")
+                continue
+                # return True
+            validated = schema.validateType(result.get("data"), result.get("schema"))
+            if not validated.get("status"):
+                print(f"Validation failed : {path}")
+                return False
+            fields = schema.getRequired(path)
+            if not fields.get("status"):
+                continue
+            for field in fields.get("data", []):
+                if validated.get("data") == "array":
+                    sub_path = path + ".items"
+                    queue.append(sub_path)
+                elif validated.get("data")=="object":
+                    sub_path = path + ".properties." + field if path else "properties." + field
+                    queue.append(sub_path)
+        return True
         
     except Exception as e:
+        print("ERROR", e)
         return False

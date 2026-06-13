@@ -15,4 +15,5 @@ for _ in range (100):
     candidates.append(json.loads(candidate))
 
 print (len(candidates))
-print(validateSchema())
+for candidate in candidates:
+    print(validateSchema(candidate))
