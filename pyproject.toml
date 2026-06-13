@@ -1,0 +1,21 @@
+[project]
+name = "h2s"
+version = "0.1.0"
+description = "h2s hackathon data analysis project"
+authors = [
+    {name = "KushagraParasramka",email = "parasramka.kushagra123@gmail.com"}
+]
+requires-python = ">=3.14"
+dependencies = [
+    "numpy (>=2.4.6,<3.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+dev = [
+    "jupyterlab (>=4.5.8,<5.0.0)"
+]
